@@ -310,7 +310,6 @@ export default function Contacts() {
           }
         />
       ) : view === "grid" ? (
-        /* ── Card grid view ── */
         <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
           {ordered.map((contact) => (
             <ContactCard
@@ -326,7 +325,6 @@ export default function Contacts() {
           ))}
         </div>
       ) : (
-        /* ── Table view ── */
         <Card className="overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -358,8 +356,6 @@ export default function Contacts() {
           </div>
         </Card>
       )}
-
-      {/* ── Detail Drawer ── */}
       <ContactDrawer
         open={Boolean(selected)}
         contact={selected}
@@ -367,16 +363,12 @@ export default function Contacts() {
         onEdit={() => openEdit(selected)}
         onDelete={() => setToDelete(selected)}
       />
-
-      {/* ── Add / Edit Dialog ── */}
       <ContactFormDialog
         open={formOpen}
         contact={editing}
         onClose={() => setFormOpen(false)}
         onSaved={handleSaved}
       />
-
-      {/* ── Delete confirmation ── */}
       <ConfirmDialog
         open={Boolean(toDelete)}
         onClose={() => setToDelete(null)}
