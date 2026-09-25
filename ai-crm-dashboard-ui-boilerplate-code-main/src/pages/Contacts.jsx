@@ -242,7 +242,6 @@ export default function Contacts() {
         />
       </div>
       <Card className="space-y-4 p-4">
-        {/* Search */}
         <div className="relative">
           <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-soft" />
           <input
@@ -253,16 +252,13 @@ export default function Contacts() {
           />
         </div>
 
-        {/* Tag chips + meta row */}
         <div className="flex flex-wrap items-center gap-2">
-          {/* "All" chip */}
           <TagChip
             label="All"
             count={tagCounts.All}
             active={!filters.tag}
             onClick={() => setFilters({ ...filters, tag: "" })}
           />
-          {/* One chip per unique tag */}
           {allTags.map((t) => (
             <TagChip
               key={t}
@@ -274,8 +270,6 @@ export default function Contacts() {
               }
             />
           ))}
-
-          {/* Right-aligned controls */}
           <div className="ml-auto flex items-center gap-3">
             {filtersActive && (
               <button
@@ -294,7 +288,6 @@ export default function Contacts() {
         </div>
       </Card>
 
-      {/* ── Results — loading / empty / grid / table ── */}
       {contacts === null ? (
         <div className="flex items-center justify-center py-20">
           <Spinner />
