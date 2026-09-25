@@ -571,12 +571,10 @@ function ContactTableRow({
         </div>
       </td>
 
-      {/* Title */}
       <td className="px-6 py-3.5 text-sm text-ink-soft">
         {contact.title || "—"}
       </td>
 
-      {/* Tags */}
       <td className="px-6 py-3.5">
         <div className="flex flex-wrap gap-1">
           {(contact.tags || []).slice(0, 2).map((tag) => (
@@ -598,7 +596,6 @@ function ContactTableRow({
         </div>
       </td>
 
-      {/* Email */}
       <td className="px-6 py-3.5 text-sm text-ink-soft">
         {contact.email ? (
           <a
@@ -612,16 +609,11 @@ function ContactTableRow({
           "—"
         )}
       </td>
-
-      {/* Phone */}
       <td className="px-6 py-3.5 text-sm text-ink-soft">
         {contact.phone || "—"}
       </td>
-
-      {/* Actions */}
       <td className="px-6 py-3.5" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-end gap-1">
-          {/* Favorite star */}
           <button
             onClick={(e) => onToggleFavorite(e, contact)}
             disabled={favLoading}
@@ -654,10 +646,6 @@ function ContactTableRow({
     </tr>
   );
 }
-
-/* ─── ContactDrawer ──────────────────────────────────────────────────────────
-   Right slide-over detail panel for a single contact.
-   ──────────────────────────────────────────────────────────────────────────── */
 function ContactDrawer({ open, contact, onClose, onEdit, onDelete }) {
   if (!contact) return null;
 
