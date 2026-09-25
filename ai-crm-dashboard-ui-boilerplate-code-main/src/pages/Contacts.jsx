@@ -40,12 +40,6 @@ import { contactsApi } from "../lib/services";
 import { relative, shortDate } from "../lib/format";
 import { cn } from "../lib/utils";
 
-/* ─── useFlip ─────────────────────────────────────────────────────────────────
-   FLIP animation: when the ordered list changes (e.g. a contact is starred and
-   floats to the top), smoothly slide each card from its previous position to
-   its new one. Reads element rects before/after the reorder and animates the
-   inverse transform to zero. Respects prefers-reduced-motion.
-   ──────────────────────────────────────────────────────────────────────────── */
 function useFlip(dep) {
   const containerRef = useRef(null);
   const prevRects = useRef(new Map());
@@ -55,7 +49,6 @@ function useFlip(dep) {
     if (!el) return;
     const nodes = Array.from(el.querySelectorAll("[data-flip-id]"));
 
-    // Measure all new positions first, before applying any transforms.
     const nextRects = new Map();
     nodes.forEach((n) => nextRects.set(n.dataset.flipId, n.getBoundingClientRect()));
 
