@@ -674,8 +674,6 @@ function ContactDrawer({ open, contact, onClose, onEdit, onDelete }) {
             )}
           </div>
         </div>
-
-        {/* Contact fields */}
         <div className="rounded-2xl border border-line divide-y divide-line">
           {contact.email && (
             <DrawerRow icon={<Mail className="h-4 w-4" />} label="Email">
@@ -705,8 +703,6 @@ function ContactDrawer({ open, contact, onClose, onEdit, onDelete }) {
             </DrawerRow>
           )}
         </div>
-
-        {/* Tags */}
         {contact.tags?.length > 0 && (
           <div>
             <div className="flex items-center gap-1.5 text-xs font-medium text-ink-soft uppercase tracking-wide mb-2">
@@ -721,8 +717,6 @@ function ContactDrawer({ open, contact, onClose, onEdit, onDelete }) {
             </div>
           </div>
         )}
-
-        {/* Notes */}
         {contact.notes && (
           <div>
             <p className="text-xs font-medium text-ink-soft uppercase tracking-wide mb-2">
@@ -733,14 +727,10 @@ function ContactDrawer({ open, contact, onClose, onEdit, onDelete }) {
             </p>
           </div>
         )}
-
-        {/* Meta */}
         <p className="text-xs text-ink-soft">
           Added {shortDate(contact.createdAt)}{" "}
           <span className="opacity-60">({relative(contact.createdAt)})</span>
         </p>
-
-        {/* Action buttons */}
         <div className="flex gap-3 pt-2 border-t border-line">
           <Button variant="outline" className="flex-1" onClick={onEdit}>
             <Pencil className="h-4 w-4" /> Edit
