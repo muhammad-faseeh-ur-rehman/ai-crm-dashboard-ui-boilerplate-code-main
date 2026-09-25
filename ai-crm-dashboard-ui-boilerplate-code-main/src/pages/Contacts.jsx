@@ -166,9 +166,6 @@ export default function Contacts() {
   };
 
   const handleSaved = () => load();
-
-  // Toggle favorite star — optimistic in-place update (no full reload, so the
-  // grid doesn't unmount and the scroll position is preserved).
   const toggleFavorite = async (e, contact) => {
     e.stopPropagation();
     if (favLoading[contact._id]) return;
@@ -181,7 +178,6 @@ export default function Contacts() {
     try {
       await contactsApi.update(contact._id, { favorite: next });
     } catch (err) {
-      // Revert on failure.
       setContacts((prev) =>
         (prev || []).map((c) =>
           c._id === contact._id ? { ...c, favorite: !next } : c
@@ -210,7 +206,6 @@ export default function Contacts() {
 
   return (
     <div className="space-y-6">
-      {/* ── Page header ── */}
       <PageHeader
         title="Contacts"
         subtitle="Your people and professional relationships."
@@ -220,7 +215,6 @@ export default function Contacts() {
         </Button>
       </PageHeader>
 
-      {/* ── KPI strip ── */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <StatTile
           icon={Users}
@@ -247,8 +241,6 @@ export default function Contacts() {
           value={kpis.tagged}
         />
       </div>
-
-      {/* ── Toolbar Card ── */}
       <Card className="space-y-4 p-4">
         {/* Search */}
         <div className="relative">
