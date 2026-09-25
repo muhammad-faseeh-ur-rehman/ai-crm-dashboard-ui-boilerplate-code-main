@@ -103,9 +103,6 @@ export default function Contacts() {
   };
   useEffect(load, []);
 
-  // ── Derived data ────────────────────────────────────────────────────
-
-  // Collect unique tags across all contacts for the chip filter row
   const allTags = useMemo(() => {
     if (!contacts) return [];
     const set = new Set();
@@ -113,7 +110,6 @@ export default function Contacts() {
     return Array.from(set).sort();
   }, [contacts]);
 
-  // Per-tag counts (from all contacts, not just filtered) for live chip counts
   const tagCounts = useMemo(() => {
     const c = { All: contacts?.length || 0 };
     allTags.forEach((t) => {
@@ -124,7 +120,6 @@ export default function Contacts() {
     return c;
   }, [contacts, allTags]);
 
-  // KPI numbers computed from the full (unfiltered) contacts list
   const kpis = useMemo(() => {
     const list = contacts || [];
     const favorites = list.filter((c) => c.favorite).length;
@@ -133,7 +128,6 @@ export default function Contacts() {
     return { total: list.length, favorites, companies: uniqueCompanies, tagged };
   }, [contacts]);
 
-  // Client-side filtering: search by name/email/company and by tag
   const filtered = useMemo(() => {
     if (!contacts) return [];
     return contacts.filter((c) => {
@@ -150,8 +144,6 @@ export default function Contacts() {
     });
   }, [contacts, filters]);
 
-  // Favorites float to the top; everything else keeps its relative order
-  // (Array.prototype.sort is stable).
   const ordered = useMemo(
     () => [...filtered].sort((a, b) => (b.favorite ? 1 : 0) - (a.favorite ? 1 : 0)),
     [filtered]
@@ -159,11 +151,8 @@ export default function Contacts() {
 
   const filtersActive = filters.search || filters.tag;
 
-  // FLIP refs — animate cards/rows sliding to their new position on reorder.
   const gridRef = useFlip(ordered);
   const tableRef = useFlip(ordered);
-
-  // ── Handlers ──────────────────────────────────────────────────────
 
   const openNew = () => {
     setEditing(null);
