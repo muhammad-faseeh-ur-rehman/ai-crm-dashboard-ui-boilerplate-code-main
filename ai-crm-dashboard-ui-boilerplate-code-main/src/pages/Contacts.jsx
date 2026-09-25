@@ -81,25 +81,19 @@ function useFlip(dep) {
   return containerRef;
 }
 
-/* ─── Contacts page ──────────────────────────────────────────────────────────
-   Full CRUD management: KPI strip, tag chip filter bar, card/table views,
-   drawer detail, add/edit dialog (react-hook-form), delete confirm.
-   All filtering is client-side for instant response.
-   ──────────────────────────────────────────────────────────────────────────── */
 export default function Contacts() {
   // null = loading, [] = empty, [...] = loaded
   const [contacts, setContacts] = useState(null);
   const [filters, setFilters] = useState({ search: "", tag: "" });
-  const [view, setView] = useState("grid"); // "grid" | "table"
+  const [view, setView] = useState("grid"); 
 
   const [formOpen, setFormOpen] = useState(false);
-  const [editing, setEditing] = useState(null);   // contact being edited
-  const [selected, setSelected] = useState(null); // contact open in drawer
-  const [toDelete, setToDelete] = useState(null); // contact pending deletion
+  const [editing, setEditing] = useState(null);   
+  const [selected, setSelected] = useState(null); 
+  const [toDelete, setToDelete] = useState(null); 
   const [deleting, setDeleting] = useState(false);
-  const [favLoading, setFavLoading] = useState({}); // { [id]: bool }
+  const [favLoading, setFavLoading] = useState({}); 
 
-  // Fetch all contacts and store them
   const load = () => {
     setContacts(null);
     contactsApi
