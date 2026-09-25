@@ -450,11 +450,6 @@ function ViewToggle({ view, onChange }) {
     </div>
   );
 }
-
-/* ─── ContactCard ────────────────────────────────────────────────────────────
-   Single premium contact tile for the card grid view.
-   Shows avatar, name, title/company, favorite toggle, tags, email/phone.
-   ──────────────────────────────────────────────────────────────────────────── */
 function ContactCard({
   contact,
   flipId,
@@ -470,7 +465,6 @@ function ContactCard({
       onClick={onOpen}
       className="relative cursor-pointer rounded-2xl border border-line bg-surface p-5 shadow-(--shadow-card) transition-all duration-200 hover:-translate-y-0.5 hover:shadow-(--shadow-pop)"
     >
-      {/* Favorite star — top right, stopPropagation so card click doesn't fire */}
       <button
         onClick={(e) => onToggleFavorite(e, contact)}
         disabled={favLoading}
@@ -484,8 +478,6 @@ function ContactCard({
           )}
         />
       </button>
-
-      {/* Dropdown — positioned below the star */}
       <div
         className="absolute right-3 top-10 mt-1"
         onClick={(e) => e.stopPropagation()}
@@ -505,8 +497,6 @@ function ContactCard({
           </DropdownItem>
         </Dropdown>
       </div>
-
-      {/* Avatar + identity */}
       <div className="flex items-start gap-3 pr-8">
         <Avatar name={contact.name} size="md" />
         <div className="min-w-0">
