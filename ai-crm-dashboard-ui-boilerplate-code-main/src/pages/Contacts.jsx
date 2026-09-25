@@ -381,11 +381,6 @@ export default function Contacts() {
     </div>
   );
 }
-
-/* ─── StatTile ───────────────────────────────────────────────────────────────
-   KPI card: tinted icon square + label + large value.
-   Copied from Leads' StatTile pattern.
-   ──────────────────────────────────────────────────────────────────────────── */
 function StatTile({ icon: Icon, label, value, tint }) {
   return (
     <Card className="p-4">
@@ -406,10 +401,6 @@ function StatTile({ icon: Icon, label, value, tint }) {
     </Card>
   );
 }
-
-/* ─── TagChip ────────────────────────────────────────────────────────────────
-   Quick-filter pill for a single tag. Copied from Leads' StageChip pattern.
-   ──────────────────────────────────────────────────────────────────────────── */
 function TagChip({ label, count, active, onClick }) {
   return (
     <button
@@ -433,10 +424,6 @@ function TagChip({ label, count, active, onClick }) {
     </button>
   );
 }
-
-/* ─── ViewToggle ─────────────────────────────────────────────────────────────
-   Segmented Table2 / LayoutGrid icon toggle. Copied from Leads.
-   ──────────────────────────────────────────────────────────────────────────── */
 function ViewToggle({ view, onChange }) {
   const options = [
     { value: "grid", icon: LayoutGrid, label: "Card view" },
