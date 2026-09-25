@@ -510,8 +510,6 @@ function ContactCard({
           )}
         </div>
       </div>
-
-      {/* Tags */}
       {contact.tags?.length > 0 && (
         <div className="mt-3 flex flex-wrap gap-1.5">
           {contact.tags.slice(0, 3).map((tag) => (
@@ -529,8 +527,6 @@ function ContactCard({
           )}
         </div>
       )}
-
-      {/* Contact info rows */}
       <div className="mt-3 space-y-1.5">
         {contact.email && (
           <div className="flex items-center gap-2 text-sm text-ink-soft min-w-0">
@@ -548,10 +544,6 @@ function ContactCard({
     </div>
   );
 }
-
-/* ─── ContactTableRow ────────────────────────────────────────────────────────
-   Single row for the table view.
-   ──────────────────────────────────────────────────────────────────────────── */
 function ContactTableRow({
   contact,
   flipId,
@@ -567,7 +559,6 @@ function ContactTableRow({
       onClick={onOpen}
       className="group cursor-pointer border-b border-line last:border-0 transition hover:bg-surface-muted/50"
     >
-      {/* Contact (avatar + name + company) */}
       <td className="px-6 py-3.5">
         <div className="flex items-center gap-3">
           <Avatar name={contact.name} size="sm" />
