@@ -743,8 +743,6 @@ function ContactDrawer({ open, contact, onClose, onEdit, onDelete }) {
     </Drawer>
   );
 }
-
-/* ── Single row in the drawer info table ── */
 function DrawerRow({ icon, label, children }) {
   return (
     <div className="flex items-center gap-3 px-4 py-3">
@@ -754,11 +752,6 @@ function DrawerRow({ icon, label, children }) {
     </div>
   );
 }
-
-/* ─── ContactFormDialog ──────────────────────────────────────────────────────
-   Add / Edit dialog backed by react-hook-form.
-   Tags are entered as a comma-separated string and split on submit.
-   ──────────────────────────────────────────────────────────────────────────── */
 function ContactFormDialog({ open, contact, onClose, onSaved }) {
   const isEdit = Boolean(contact);
 
@@ -768,8 +761,6 @@ function ContactFormDialog({ open, contact, onClose, onSaved }) {
     reset,
     formState: { errors, isSubmitting },
   } = useForm();
-
-  // Reset form defaults when dialog opens or the editing target changes
   useEffect(() => {
     if (open) {
       reset(
@@ -799,7 +790,6 @@ function ContactFormDialog({ open, contact, onClose, onSaved }) {
   }, [open, contact, reset]);
 
   const onSubmit = async (values) => {
-    // Parse comma-separated tags into a clean array
     const tags = values.tags
       ? values.tags
           .split(",")
