@@ -826,7 +826,6 @@ function ContactFormDialog({ open, contact, onClose, onSaved }) {
       }
     >
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mt-2">
-        {/* Name (required) */}
         <Field label="Full name" error={errors.name?.message}>
           <Input
             {...register("name", { required: "Name is required" })}
@@ -834,8 +833,6 @@ function ContactFormDialog({ open, contact, onClose, onSaved }) {
             autoFocus
           />
         </Field>
-
-        {/* Title + Company in a two-column row */}
         <div className="grid grid-cols-2 gap-3">
           <Field label="Title">
             <Input {...register("title")} placeholder="Head of Design" />
@@ -844,8 +841,6 @@ function ContactFormDialog({ open, contact, onClose, onSaved }) {
             <Input {...register("company")} placeholder="Acme Inc." />
           </Field>
         </div>
-
-        {/* Email + Phone */}
         <div className="grid grid-cols-2 gap-3">
           <Field label="Email">
             <Input
@@ -863,7 +858,6 @@ function ContactFormDialog({ open, contact, onClose, onSaved }) {
           </Field>
         </div>
 
-        {/* Tags — comma-separated */}
         <Field label="Tags" error={errors.tags?.message}>
           <div className="relative">
             <Tag className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-soft" />
@@ -903,7 +897,6 @@ function ContactFormDialog({ open, contact, onClose, onSaved }) {
           <Star className="ml-auto h-4 w-4 text-amber-400" />
         </label>
 
-        {/* Form actions */}
         <div className="flex gap-3 pt-1">
           <Button
             type="button"
