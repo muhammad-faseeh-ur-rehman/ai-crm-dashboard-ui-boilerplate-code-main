@@ -65,14 +65,12 @@ export default function Dashboard() {
   if (data === null) return <DashboardSkeleton />;
   const stats = data?.stats || {};
 
-  // A friendly trailing date-range label for the header pill.
   const today = new Date();
   const start = new Date(today.getFullYear(), today.getMonth() - 5, 1);
   const rangeLabel = `${format(start, "dd MMM")} – ${format(today, "dd MMM, yyyy")}`;
 
   return (
     <div className="space-y-6">
-      {/* Title row */}
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <h1 className="font-display text-3xl font-extrabold tracking-tight text-ink sm:text-[2.5rem]">
           Welcome Back, <span className="text-ink-soft">{user?.name?.split(" ")[0]}</span>
@@ -91,10 +89,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Balanced 3-column composition — cards distributed so the columns end
-          at roughly the same height, leaving no large vertical gaps. */}
       <div className="grid grid-cols-1 items-start gap-5 lg:grid-cols-12">
-        {/* ── Left column ───────────────────────────────── */}
         <div className="space-y-5 lg:col-span-3">
           <HeroCard value={stats.pipelineValue} />
 
@@ -109,8 +104,6 @@ export default function Dashboard() {
               </Badge>
             </div>
           </Card>
-
-          {/* Conversion stat */}
           <Card className="p-6">
             <SectionHeading icon={Target} title="Conversion" subtitle="Win rate" />
             <div className="mt-4 flex items-end gap-2">
@@ -130,8 +123,6 @@ export default function Dashboard() {
           <UpcomingTasks tasks={tasks} />
           <TopContactsCard contacts={contacts} />
         </div>
-
-        {/* ── Center column ─────────────────────────────── */}
         <div className="space-y-5 lg:col-span-6">
           <Card className="p-6">
             <SectionHeading
@@ -168,9 +159,7 @@ export default function Dashboard() {
           <PipelineByStage pipeline={data?.pipeline || []} />
         </div>
 
-        {/* ── Right column ──────────────────────────────── */}
         <div className="space-y-5 lg:col-span-3">
-          {/* Revenue / balance card */}
           <Card className="p-6">
             <SectionHeading title="Revenue Goal" subtitle="Closed-won total" to="/pipeline" />
             <p className="mt-4 text-center text-sm text-ink-soft">Total Won</p>
@@ -203,7 +192,6 @@ export default function Dashboard() {
   );
 }
 
-/* ── Pipeline by stage (funnel-style breakdown) ─────────────────────── */
 function PipelineByStage({ pipeline, className }) {
   const maxValue = Math.max(...pipeline.map((s) => s.value), 1);
   const totalValue = pipeline.reduce((sum, s) => sum + s.value, 0);
@@ -250,9 +238,7 @@ function PipelineByStage({ pipeline, className }) {
   );
 }
 
-/* ── Leads by source (donut chart) ──────────────────────────────────── */
 function LeadsBySource({ leads }) {
-  // Group leads by their source field.
   const grouped = leads.reduce((acc, l) => {
     const key = l.source || "Other";
     acc[key] = (acc[key] || 0) + 1;
@@ -310,7 +296,6 @@ function LeadsBySource({ leads }) {
   );
 }
 
-/* ── Upcoming follow-ups (next due tasks) ───────────────────────────── */
 function UpcomingTasks({ tasks }) {
   const upcoming = tasks
     .filter((t) => t.status !== "Completed")
@@ -366,7 +351,6 @@ function UpcomingTasks({ tasks }) {
   );
 }
 
-/* ── Top open deals (highest-value active leads) ────────────────────── */
 function TopDeals({ leads }) {
   const deals = [...leads]
     .filter((l) => l.status !== "Won" && l.status !== "Lost")
@@ -409,8 +393,6 @@ function TopDeals({ leads }) {
     </Card>
   );
 }
-
-/* ── Engagement bar chart with a highlighted peak + floating bubble ──── */
 function EngagementChart({ trend }) {
   const counts = trend.map((t) => t.leads);
   const max = Math.max(...counts, 1);
@@ -418,7 +400,6 @@ function EngagementChart({ trend }) {
   const prev = maxIndex > 0 ? counts[maxIndex - 1] : 0;
   const growth = prev > 0 ? Math.round(((max - prev) / prev) * 1000) / 10 : 17.8;
 
-  // Custom label: render a rounded "+x%" bubble above the tallest bar only.
   const renderPeak = (props) => {
     const { x, y, width, index } = props;
     if (index !== maxIndex) return null;
@@ -493,8 +474,6 @@ function ChartTooltip({ active, payload, label, prefix = "", unit = "" }) {
     </div>
   );
 }
-
-/* ── Recent activity table (Payment History style) ──────────────────── */
 function ActivityTable({ leads }) {
   if (!leads.length)
     return <p className="py-10 text-center text-sm text-ink-soft">No recent activity yet.</p>;
@@ -549,8 +528,6 @@ function ActivityTable({ leads }) {
     </div>
   );
 }
-
-/* ── Top contacts (avatar stack — the "Mandatory Payments" slot) ─────── */
 function TopContactsCard({ contacts }) {
   const top = contacts.slice(0, 4);
   const overflow = Math.max(contacts.length - top.length, 0);
