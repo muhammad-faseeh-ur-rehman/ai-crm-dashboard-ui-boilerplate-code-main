@@ -45,8 +45,6 @@ import { currency, shortDate, timeOf } from "../lib/format";
 import { STAGE_STYLES, PRIORITY_STYLES } from "../lib/constants";
 import { useAuth } from "../context/AuthContext";
 import { cn } from "../lib/utils";
-
-/* Donut palette — sky-blue family used for the "Leads by Source" chart. */
 const SOURCE_COLORS = ["#0ea5e9", "#38bdf8", "#0369a1", "#7dd3fc", "#0284c7", "#bae6fd"];
 
 export default function Dashboard() {
