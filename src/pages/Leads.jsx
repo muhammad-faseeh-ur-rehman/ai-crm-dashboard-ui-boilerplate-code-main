@@ -65,10 +65,6 @@ export default function Leads() {
     leadsApi.list().then((res) => setLeads(res.leads)).catch(() => setLeads([]));
   };
   useEffect(load, []);
-
-  /* ── Derived data ─────────────────────────────────────────────────── */
-  // Counts per stage drive the quick-filter chips (independent of the active
-  // stage filter so the numbers stay stable).
   const stageCounts = useMemo(() => {
     const c = { All: leads?.length || 0 };
     LEAD_STAGES.forEach((s) => (c[s] = 0));
@@ -134,8 +130,6 @@ export default function Leads() {
 
   const filtersActive =
     filters.status || filters.priority || filters.source || filters.search;
-
-  /* ── Handlers ─────────────────────────────────────────────────────── */
   const toggleSort = (key) =>
     setSort((s) =>
       s.key === key
@@ -193,9 +187,6 @@ export default function Leads() {
       setDeleting(false);
     }
   };
-
-  /* Export to CSV. If rows are checked, export just those; otherwise export
-     the current filtered + sorted view. */
   const exportCSV = () => {
     const rows = selected.size > 0 ? sorted.filter((l) => selected.has(l._id)) : sorted;
     if (!rows.length) {
@@ -245,8 +236,6 @@ export default function Leads() {
           <Plus className="h-4 w-4" /> Add lead
         </Button>
       </PageHeader>
-
-      {/* KPI strip */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <StatTile icon={Users} tint="bg-brand-50 text-brand-600" label="Total leads" value={kpis.count} />
         <StatTile
@@ -268,8 +257,6 @@ export default function Leads() {
           value={currency(kpis.avg, { compact: true })}
         />
       </div>
-
-      {/* Toolbar */}
       <Card className="space-y-4 p-4">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
           <div className="relative flex-1">
@@ -296,8 +283,6 @@ export default function Leads() {
             />
           </div>
         </div>
-
-        {/* Stage quick-filter chips */}
         <div className="flex flex-wrap items-center gap-2">
           <StageChip
             label="All"
