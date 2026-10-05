@@ -162,7 +162,6 @@ function NoteFormDialog({ open, onClose, note, leads, onSaved }) {
     const payload = {
       content: values.content,
       pinned: values.pinned,
-      // Pass lead id only if selected; undefined removes the field on update
       lead: values.lead || undefined,
     };
 
@@ -211,7 +210,6 @@ function NoteFormDialog({ open, onClose, note, leads, onSaved }) {
           </Select>
         </Field>
 
-        {/* Pinned pill toggle */}
         <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-line bg-surface-muted/40 px-4 py-3 transition hover:bg-surface-muted/70">
           <div className="relative flex-shrink-0">
             <input type="checkbox" className="peer sr-only" {...register("pinned")} />
@@ -225,7 +223,6 @@ function NoteFormDialog({ open, onClose, note, leads, onSaved }) {
           </div>
         </label>
 
-        {/* Actions */}
         <div className="flex gap-3 pt-1">
           <Button type="button" variant="outline" className="flex-1" onClick={onClose}>
             Cancel
@@ -239,13 +236,10 @@ function NoteFormDialog({ open, onClose, note, leads, onSaved }) {
   );
 }
 
-// ── Page ───────────────────────────────────────────────────────────────────────
 export default function Notes() {
-  // ── Data ─────────────────────────────────────────────────────────────────
   const [notes, setNotes] = useState(null);  // null = loading
   const [leads, setLeads] = useState([]);    // lead picker options
 
-  // ── UI state ──────────────────────────────────────────────────────────────
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all"); // "all" | "pinned" | "linked" | "unlinked"
   const [formOpen, setFormOpen] = useState(false);
@@ -253,7 +247,6 @@ export default function Notes() {
   const [toDelete, setToDelete] = useState(null);
   const [deleting, setDeleting] = useState(false);
 
-  // ── Fetch ─────────────────────────────────────────────────────────────────
   const load = () => {
     setNotes(null);
     notesApi.list().then((res) => setNotes(res.notes)).catch(() => setNotes([]));
@@ -264,7 +257,6 @@ export default function Notes() {
     leadsApi.list().then((res) => setLeads(res.leads ?? [])).catch(() => {});
   }, []);
 
-  // ── KPI counts (stable — independent of active filter) ───────────────────
   const kpis = useMemo(() => {
     const list = notes || [];
     return {
@@ -275,7 +267,6 @@ export default function Notes() {
     };
   }, [notes]);
 
-  // ── Quick-filter chip counts ──────────────────────────────────────────────
   const chipCounts = useMemo(() => ({
     all: kpis.total,
     pinned: kpis.pinned,
@@ -283,17 +274,13 @@ export default function Notes() {
     unlinked: kpis.unlinked,
   }), [kpis]);
 
-  // ── Client-side filtering (search + quick-filter chip) ───────────────────
   const filtered = useMemo(() => {
     if (!notes) return [];
     let list = notes;
 
-    // Quick-filter chip
     if (filter === "pinned") list = list.filter((n) => n.pinned);
     else if (filter === "linked") list = list.filter((n) => n.lead || n.contact);
     else if (filter === "unlinked") list = list.filter((n) => !n.lead && !n.contact);
-
-    // Content search
     if (search.trim()) {
       const q = search.toLowerCase();
       list = list.filter((n) => n.content?.toLowerCase().includes(q));
@@ -304,7 +291,6 @@ export default function Notes() {
 
   const isActive = search.trim() || filter !== "all";
 
-  // ── Handlers ──────────────────────────────────────────────────────────────
   const openNew = () => { setEditing(null); setFormOpen(true); };
   const openEdit = (note) => { setEditing(note); setFormOpen(true); };
   const handleSaved = () => { setFormOpen(false); load(); };
@@ -335,17 +321,14 @@ export default function Notes() {
 
   const clearAll = () => { setSearch(""); setFilter("all"); };
 
-  // ── Render ────────────────────────────────────────────────────────────────
   return (
     <div className="space-y-6">
-      {/* Page header */}
       <PageHeader title="Notes" subtitle="Capture context across your deals and contacts.">
         <Button onClick={openNew}>
           <Plus className="h-4 w-4" /> New note
         </Button>
       </PageHeader>
 
-      {/* KPI strip */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <StatTile
           icon={StickyNote}
@@ -372,10 +355,7 @@ export default function Notes() {
           value={kpis.unlinked}
         />
       </div>
-
-      {/* Toolbar */}
       <Card className="space-y-4 p-4">
-        {/* Search row */}
         <div className="relative">
           <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-soft" />
           <input
@@ -386,7 +366,6 @@ export default function Notes() {
           />
         </div>
 
-        {/* Quick-filter chips + result count */}
         <div className="flex flex-wrap items-center gap-2">
           <FilterChip
             label="All"
@@ -429,8 +408,6 @@ export default function Notes() {
           </div>
         </div>
       </Card>
-
-      {/* Masonry grid / loading / empty */}
       {notes === null ? (
         <div className="flex justify-center py-16">
           <Spinner />
@@ -453,7 +430,6 @@ export default function Notes() {
           }
         />
       ) : (
-        /* Masonry via CSS columns */
         <div className="columns-1 sm:columns-2 xl:columns-3 gap-4 *:mb-4">
           {filtered.map((note) => (
             <NoteCard
@@ -467,7 +443,6 @@ export default function Notes() {
         </div>
       )}
 
-      {/* New / Edit dialog */}
       <NoteFormDialog
         open={formOpen}
         onClose={() => setFormOpen(false)}
