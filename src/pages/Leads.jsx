@@ -318,8 +318,6 @@ export default function Leads() {
           </div>
         </div>
       </Card>
-
-      {/* Results — table or card grid */}
       {leads === null ? (
         <Card>
           <Spinner />
@@ -456,8 +454,6 @@ export default function Leads() {
           </div>
         </Card>
       )}
-
-      {/* Floating bulk action bar */}
       {selected.size > 0 && (
         <div className="fixed bottom-6 left-1/2 z-40 flex -translate-x-1/2 items-center gap-3 rounded-full border border-line bg-surface px-3 py-2 shadow-[var(--shadow-pop)] animate-fade-up">
           <span className="pl-2 text-sm font-medium text-ink">
@@ -474,8 +470,6 @@ export default function Leads() {
           </Button>
         </div>
       )}
-
-      {/* Dialogs / drawer */}
       <LeadFormDialog
         open={formOpen}
         onClose={() => setFormOpen(false)}
@@ -508,8 +502,6 @@ export default function Leads() {
     </div>
   );
 }
-
-/* ── Table / grid view toggle ───────────────────────────────────────── */
 function ViewToggle({ view, onChange }) {
   const options = [
     { value: "table", icon: Table2, label: "Table view" },
@@ -534,8 +526,6 @@ function ViewToggle({ view, onChange }) {
     </div>
   );
 }
-
-/* ── Card used in the grid view ─────────────────────────────────────── */
 function LeadGridCard({ lead, selected, onToggle, onOpen, onEdit, onDelete }) {
   const stage = STAGE_STYLES[lead.status] || STAGE_STYLES.New;
   return (
@@ -601,9 +591,6 @@ function LeadGridCard({ lead, selected, onToggle, onOpen, onEdit, onDelete }) {
     </div>
   );
 }
-
-/* ── Small building blocks ──────────────────────────────────────────── */
-
 function StatTile({ icon: Icon, label, value, tint }) {
   return (
     <Card className="p-4">
