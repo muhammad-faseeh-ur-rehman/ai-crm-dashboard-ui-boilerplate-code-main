@@ -24,7 +24,6 @@ import { PIPELINE_STAGES, STAGE_STYLES, PRIORITY_STYLES } from "../lib/constants
 import { cn } from "../lib/utils";
 import { toast } from "sonner";
 
-/* Group a flat lead list into { stage: Lead[] } buckets. */
 const toBoard = (leads) => {
   const board = Object.fromEntries(PIPELINE_STAGES.map((s) => [s, []]));
   for (const l of leads) (board[l.status] || board.New).push(l);
@@ -56,8 +55,6 @@ export default function Pipeline() {
   const activeLead = activeId
     ? Object.values(board).flat().find((l) => l._id === activeId)
     : null;
-
-  /* Move cards between columns live as the user drags over them. */
   const handleDragOver = ({ active, over }) => {
     if (!over) return;
     const from = findContainer(active.id);
@@ -71,14 +68,11 @@ export default function Pipeline() {
       if (idx === -1) return prev;
       const [moved] = fromItems.splice(idx, 1);
       moved.status = to;
-      // Insert near the hovered card (or append if hovering the column).
       const overIdx = toItems.findIndex((l) => l._id === over.id);
       toItems.splice(overIdx === -1 ? toItems.length : overIdx, 0, moved);
       return { ...prev, [from]: fromItems, [to]: toItems };
     });
   };
-
-  /* Persist the final ordering + stage to the backend. */
   const handleDragEnd = ({ active, over }) => {
     setActiveId(null);
     if (!over) return;
@@ -92,8 +86,6 @@ export default function Pipeline() {
       const reordered =
         oldIdx !== -1 && newIdx !== -1 ? arrayMove(items, oldIdx, newIdx) : items;
       const next = { ...prev, [container]: reordered };
-
-      // Build the persistence payload across all affected columns.
       const updates = [];
       PIPELINE_STAGES.forEach((stage) => {
         next[stage].forEach((l, order) =>
@@ -104,8 +96,6 @@ export default function Pipeline() {
       return next;
     });
   };
-
-  /* ── KPI computations ─────────────────────────────────────────────── */
   const allLeads = Object.values(board).flat();
   const totalValue = allLeads.reduce((s, l) => s + (l.value || 0), 0);
   const openDeals = allLeads.filter((l) => l.status !== "Won" && l.status !== "Lost");
@@ -121,7 +111,6 @@ export default function Pipeline() {
         subtitle={`${allLeads.length} leads · ${currency(totalValue, { compact: true })} in play`}
       />
 
-      {/* KPI summary strip */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <StatTile
           icon={DollarSign}
@@ -170,8 +159,6 @@ export default function Pipeline() {
     </div>
   );
 }
-
-/* ── KPI stat tile (matches Leads page pattern) ─────────────────────── */
 function StatTile({ icon: Icon, label, value, tint }) {
   return (
     <Card className="p-4">
@@ -187,8 +174,6 @@ function StatTile({ icon: Icon, label, value, tint }) {
     </Card>
   );
 }
-
-/* ── Column ─────────────────────────────────────────────────────────── */
 function Column({ stage, leads }) {
   const { setNodeRef, isOver } = useDroppable({ id: stage });
   const style = STAGE_STYLES[stage];
@@ -196,10 +181,8 @@ function Column({ stage, leads }) {
 
   return (
     <div className="flex w-80 shrink-0 flex-col">
-      {/* Colored top accent bar */}
       <div className={cn("mb-2 h-1 w-full rounded-full", style.bar)} />
 
-      {/* Column header */}
       <div className="mb-3 flex items-center justify-between px-1">
         <div className="flex items-center gap-2">
           <span className={cn("h-2.5 w-2.5 rounded-full", style.dot)} />
@@ -213,7 +196,6 @@ function Column({ stage, leads }) {
         </span>
       </div>
 
-      {/* Droppable column body */}
       <div
         ref={setNodeRef}
         className={cn(
@@ -236,8 +218,6 @@ function Column({ stage, leads }) {
     </div>
   );
 }
-
-/* ── Sortable card wrapper ──────────────────────────────────────────── */
 function SortableCard({ lead }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
     useSortable({ id: lead._id });
@@ -252,12 +232,8 @@ function SortableCard({ lead }) {
     </div>
   );
 }
-
-/* ── Card UI ────────────────────────────────────────────────────────── */
 function LeadCard({ lead, dragHandle, overlay }) {
   const [suggesting, setSuggesting] = useState(false);
-
-  // AI: suggest the next best action / priority for this lead.
   const suggest = async (e) => {
     e.stopPropagation();
     setSuggesting(true);
@@ -281,7 +257,6 @@ function LeadCard({ lead, dragHandle, overlay }) {
         overlay ? "shadow-[var(--shadow-pop)] rotate-2" : "hover:shadow-[var(--shadow-card)]"
       )}
     >
-      {/* Name / company row + drag handle */}
       <div className="flex items-start justify-between gap-2">
         <div className="flex items-center gap-2.5">
           <Avatar name={lead.name} size="sm" />
@@ -304,14 +279,10 @@ function LeadCard({ lead, dragHandle, overlay }) {
           </button>
         )}
       </div>
-
-      {/* Value + priority */}
       <div className="mt-3 flex items-center justify-between">
         <span className="text-sm font-bold text-ink">{currency(lead.value)}</span>
         <Badge className={PRIORITY_STYLES[lead.priority]}>{lead.priority}</Badge>
       </div>
-
-      {/* AI suggest button — appears on hover, hidden in DragOverlay */}
       {!overlay && (
         <button
           onClick={suggest}
