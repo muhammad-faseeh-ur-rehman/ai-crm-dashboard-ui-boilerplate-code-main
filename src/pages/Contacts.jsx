@@ -82,7 +82,6 @@ function useFlip(dep) {
 }
 
 export default function Contacts() {
-  // null = loading, [] = empty, [...] = loaded
   const [contacts, setContacts] = useState(null);
   const [filters, setFilters] = useState({ search: "", tag: "" });
   const [view, setView] = useState("grid"); 
@@ -652,7 +651,6 @@ function ContactDrawer({ open, contact, onClose, onEdit, onDelete }) {
   return (
     <Drawer open={open} onClose={onClose} title="Contact details">
       <div className="space-y-6">
-        {/* Identity hero */}
         <div className="flex items-center gap-4">
           <Avatar name={contact.name} size="lg" />
           <div>
@@ -872,7 +870,6 @@ function ContactFormDialog({ open, contact, onClose, onSaved }) {
           </p>
         </Field>
 
-        {/* Notes */}
         <Field label="Notes">
           <Textarea
             {...register("notes")}
@@ -881,7 +878,6 @@ function ContactFormDialog({ open, contact, onClose, onSaved }) {
           />
         </Field>
 
-        {/* Favorite toggle */}
         <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-line px-4 py-3 transition hover:bg-surface-muted select-none">
           <input
             type="checkbox"
