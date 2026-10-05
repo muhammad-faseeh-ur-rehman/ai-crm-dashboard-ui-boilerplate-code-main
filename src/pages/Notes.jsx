@@ -32,8 +32,6 @@ import {
 import { notesApi, leadsApi } from "../lib/services";
 import { relative } from "../lib/format";
 import { cn } from "../lib/utils";
-
-// ── StatTile (copied from Leads premium pattern) ───────────────────────────────
 function StatTile({ icon: Icon, label, value, tint }) {
   return (
     <Card className="p-4">
@@ -49,8 +47,6 @@ function StatTile({ icon: Icon, label, value, tint }) {
     </Card>
   );
 }
-
-// ── FilterChip (same shape as Leads' StageChip) ────────────────────────────────
 function FilterChip({ label, count, active, onClick }) {
   return (
     <button
@@ -74,10 +70,7 @@ function FilterChip({ label, count, active, onClick }) {
     </button>
   );
 }
-
-// ── NoteCard ───────────────────────────────────────────────────────────────────
 function NoteCard({ note, onEdit, onDelete, onTogglePin }) {
-  // Prefer lead over contact for the linked-entity chip
   const entity = note.lead ?? note.contact ?? null;
 
   return (
@@ -88,24 +81,19 @@ function NoteCard({ note, onEdit, onDelete, onTogglePin }) {
         note.pinned && "ring-1 ring-brand-200"
       )}
     >
-      {/* Pinned accent strip along the top */}
       {note.pinned && (
         <div className="pointer-events-none absolute inset-x-0 top-0 h-1 rounded-t-2xl bg-linear-to-r from-brand-400 to-brand-600" />
       )}
 
-      {/* Pinned icon badge */}
       {note.pinned && (
         <span className="absolute right-4 top-3 flex h-6 w-6 items-center justify-center rounded-full bg-brand-50 text-brand-500">
           <Pin className="h-3.5 w-3.5" aria-label="Pinned" />
         </span>
       )}
 
-      {/* Note content */}
       <p className="whitespace-pre-wrap text-sm leading-relaxed text-ink pr-6">
         {note.content}
       </p>
-
-      {/* Footer: linked chip + timestamp + actions */}
       <div className="flex items-center justify-between gap-2 pt-1">
         <div className="flex min-w-0 flex-wrap items-center gap-2">
           {entity && (
@@ -117,7 +105,6 @@ function NoteCard({ note, onEdit, onDelete, onTogglePin }) {
           <span className="text-xs text-ink-soft">{relative(note.createdAt)}</span>
         </div>
 
-        {/* Overflow menu */}
         <div onClick={(e) => e.stopPropagation()} className="shrink-0">
           <Dropdown
             trigger={
@@ -152,8 +139,6 @@ function NoteCard({ note, onEdit, onDelete, onTogglePin }) {
     </div>
   );
 }
-
-// ── NoteFormDialog ─────────────────────────────────────────────────────────────
 function NoteFormDialog({ open, onClose, note, leads, onSaved }) {
   const isEditing = Boolean(note);
 
@@ -163,8 +148,6 @@ function NoteFormDialog({ open, onClose, note, leads, onSaved }) {
     reset,
     formState: { errors, isSubmitting },
   } = useForm();
-
-  // Reset form whenever the dialog opens or the note being edited changes
   useEffect(() => {
     if (open) {
       reset({
