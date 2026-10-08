@@ -348,7 +348,6 @@ function AccountCard({ user, logout }) {
   );
 }
 
-/* ── Page root ──────────────────────────────────────────────────── */
 export default function Settings() {
   const { user, updateUser, logout } = useAuth();
 
