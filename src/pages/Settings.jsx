@@ -43,8 +43,6 @@ function SectionIcon({ icon: Icon, className }) {
     </div>
   );
 }
-
-/* ── 1. Profile form ────────────────────────────────────────────── */
 function ProfileCard({ user, updateUser }) {
   const {
     register,
