@@ -143,8 +143,6 @@ function ProfileCard({ user, updateUser }) {
     </Card>
   );
 }
-
-/* ── 2. Security / change-password form ────────────────────────── */
 function SecurityCard() {
   const {
     register,
