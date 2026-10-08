@@ -251,14 +251,12 @@ function AiIntegrationCard() {
 
       <CardContent className="pt-5">
         {status === null ? (
-          /* Loading state — contained so it doesn't stretch the card */
           <div className="flex items-center gap-3 py-2">
             <Spinner className="p-0" />
             <span className="text-sm text-ink-soft">Checking status…</span>
           </div>
         ) : (
           <div className="space-y-4">
-            {/* Status + model row */}
             <div className="flex flex-wrap items-center gap-3">
               {status.configured ? (
                 <Badge className="bg-brand-50 text-brand-700 border border-brand-200/60">
@@ -278,8 +276,6 @@ function AiIntegrationCard() {
                 </span>
               )}
             </div>
-
-            {/* Helpful setup note when the key is missing */}
             {!status.configured && (
               <div className="rounded-2xl border border-amber-200/60 bg-amber-50/60 px-4 py-3.5 text-sm text-amber-800">
                 <p className="font-medium mb-1">Connect your Gemini key</p>
@@ -293,8 +289,6 @@ function AiIntegrationCard() {
                 </p>
               </div>
             )}
-
-            {/* Confirmation when connected */}
             {status.configured && (
               <p className="text-sm text-ink-soft">
                 AI features are active. Summaries, email drafts, and pipeline
@@ -308,8 +302,6 @@ function AiIntegrationCard() {
     </Card>
   );
 }
-
-/* ── 4. Account info + logout ───────────────────────────────────── */
 function AccountCard({ user, logout }) {
   return (
     <Card>
