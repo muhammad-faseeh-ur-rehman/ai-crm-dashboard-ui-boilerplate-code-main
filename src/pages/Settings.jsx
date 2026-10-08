@@ -82,7 +82,6 @@ function ProfileCard({ user, updateUser }) {
       </CardHeader>
 
       <CardContent className="pt-5">
-        {/* Avatar preview row */}
         <div className="mb-6 flex items-center gap-4 rounded-2xl border border-line bg-surface-muted px-4 py-3">
           <Avatar name={user?.name} src={user?.avatar} size="lg" />
           <div>
