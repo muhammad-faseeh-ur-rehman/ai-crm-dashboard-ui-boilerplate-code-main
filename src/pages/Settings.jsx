@@ -50,8 +50,6 @@ function ProfileCard({ user, updateUser }) {
     reset,
     formState: { errors, isSubmitting },
   } = useForm();
-
-  // Sync form whenever user object changes (initial load or external update).
   useEffect(() => {
     if (!user) return;
     reset({
