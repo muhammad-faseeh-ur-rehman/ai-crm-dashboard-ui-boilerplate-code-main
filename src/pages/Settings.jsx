@@ -31,7 +31,6 @@ import { authApi, aiApi } from "../lib/services";
 import { shortDate } from "../lib/format";
 import { cn } from "../lib/utils";
 
-/* ── Small icon accent rendered beside each card title ─────────── */
 function SectionIcon({ icon: Icon, className }) {
   return (
     <div
