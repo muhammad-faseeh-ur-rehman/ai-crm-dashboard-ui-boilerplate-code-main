@@ -223,8 +223,6 @@ function SecurityCard() {
     </Card>
   );
 }
-
-/* ── 3. AI Integration status card ─────────────────────────────── */
 function AiIntegrationCard() {
   const [status, setStatus] = useState(null); // null = loading
 
