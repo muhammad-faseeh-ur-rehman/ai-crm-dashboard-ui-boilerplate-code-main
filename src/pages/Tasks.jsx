@@ -255,7 +255,6 @@ function TaskRow({ task, onToggle, onEdit, onDelete }) {
 
 
         <div className="mt-2 flex flex-wrap items-center gap-1.5">
-          {/* Due date chip */}
           {task.dueDate && (
             <span
               className={cn(
@@ -276,17 +275,14 @@ function TaskRow({ task, onToggle, onEdit, onDelete }) {
             </span>
           )}
 
-          {/* Priority badge */}
           <Badge className={cn("text-xs", PRIORITY_STYLES[task.priority])}>
             {task.priority}
           </Badge>
 
-          {/* Status badge */}
           <Badge className={cn("text-xs", TASK_STATUS_STYLES[task.status])}>
             {task.status}
           </Badge>
 
-          {/* Linked lead chip */}
           {task.relatedLead && (
             <span className="inline-flex items-center gap-1 rounded-lg bg-brand-50 px-2 py-0.5 text-xs font-medium text-brand-700">
               <Building2 className="h-3 w-3" />
@@ -296,7 +292,6 @@ function TaskRow({ task, onToggle, onEdit, onDelete }) {
         </div>
       </div>
 
-      {/* Row actions */}
       <div className="shrink-0 opacity-0 transition-opacity group-hover:opacity-100">
         <Dropdown
           trigger={
@@ -317,7 +312,6 @@ function TaskRow({ task, onToggle, onEdit, onDelete }) {
   );
 }
 
-// ─── Group section header (module-level) ──────────────────────────────────────
 function GroupHeader({ label, count, labelClass, countClass }) {
   return (
     <div className="flex items-center gap-2 border-b border-line bg-surface-muted/30 px-5 py-2">
@@ -331,7 +325,6 @@ function GroupHeader({ label, count, labelClass, countClass }) {
   );
 }
 
-// ─── Completion progress bar card (module-level) ──────────────────────────────
 function ProgressCard({ completed, total }) {
   const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
   return (
@@ -342,9 +335,7 @@ function ProgressCard({ completed, total }) {
         </span>
         <span className="text-sm font-semibold text-brand-700">{pct}%</span>
       </div>
-      {/* Track */}
       <div className="h-2 w-full rounded-full bg-surface-muted overflow-hidden">
-        {/* Fill — inline style for dynamic width, class for gradient */}
         <div
           className="h-full rounded-full bg-linear-to-r from-brand-400 to-brand-600 transition-all duration-500"
           style={{ width: `${pct}%` }}
@@ -354,7 +345,6 @@ function ProgressCard({ completed, total }) {
   );
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
 export default function Tasks() {
   // Raw data
   const [tasks, setTasks] = useState(null);
@@ -367,7 +357,6 @@ export default function Tasks() {
   const [toDelete, setToDelete] = useState(null);
   const [deleting, setDeleting] = useState(false);
 
-  // ── Data loading ─────────────────────────────────────────────────────────
   const load = () => {
     setTasks(null);
     tasksApi.list().then((res) => setTasks(res.tasks)).catch(() => setTasks([]));
