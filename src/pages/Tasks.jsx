@@ -157,7 +157,7 @@ function TaskFormDialog({ open, onClose, task, leads, onSaved }) {
         </Field>
 
         <div className="grid grid-cols-2 gap-3">
-          
+
           <Field label="Due date">
             <Input type="date" {...register("dueDate")} />
           </Field>
@@ -170,7 +170,6 @@ function TaskFormDialog({ open, onClose, task, leads, onSaved }) {
           </Field>
         </div>
 
-        {/* Status */}
         <Field label="Status">
           <Select {...register("status")}>
             {TASK_STATUSES.map((s) => (
@@ -179,7 +178,6 @@ function TaskFormDialog({ open, onClose, task, leads, onSaved }) {
           </Select>
         </Field>
 
-        {/* Linked lead */}
         <Field label="Linked lead">
           <Select {...register("relatedLead")}>
             <option value="">No linked lead</option>
@@ -191,7 +189,6 @@ function TaskFormDialog({ open, onClose, task, leads, onSaved }) {
           </Select>
         </Field>
 
-        {/* Actions */}
         <div className="flex gap-3 pt-1">
           <Button type="button" variant="outline" className="flex-1" onClick={onClose}>
             Cancel
@@ -205,7 +202,6 @@ function TaskFormDialog({ open, onClose, task, leads, onSaved }) {
   );
 }
 
-// ─── Single task row (module-level component) ─────────────────────────────────
 function TaskRow({ task, onToggle, onEdit, onDelete }) {
   const done    = task.status === "Completed";
   const inProg  = task.status === "In Progress";
@@ -214,7 +210,6 @@ function TaskRow({ task, onToggle, onEdit, onDelete }) {
 
   return (
     <div className="group relative flex items-start gap-3 px-5 py-4 transition-colors hover:bg-surface-muted/50">
-      {/* Priority accent bar — always visible, not only on hover */}
       <span
         aria-hidden
         className={cn(
@@ -223,7 +218,6 @@ function TaskRow({ task, onToggle, onEdit, onDelete }) {
         )}
       />
 
-      {/* Status toggle */}
       <button
         onClick={() => onToggle(task)}
         aria-label={done ? "Mark as pending" : "Mark as completed"}
@@ -245,9 +239,7 @@ function TaskRow({ task, onToggle, onEdit, onDelete }) {
         )}
       </button>
 
-      {/* Main content */}
       <div className="min-w-0 flex-1">
-        {/* Title */}
         <p
           className={cn(
             "text-sm font-medium leading-snug",
@@ -257,12 +249,11 @@ function TaskRow({ task, onToggle, onEdit, onDelete }) {
           {task.title}
         </p>
 
-        {/* Description */}
         {task.description && (
           <p className="mt-0.5 truncate text-xs text-ink-soft">{task.description}</p>
         )}
 
-        {/* Meta chips */}
+
         <div className="mt-2 flex flex-wrap items-center gap-1.5">
           {/* Due date chip */}
           {task.dueDate && (
