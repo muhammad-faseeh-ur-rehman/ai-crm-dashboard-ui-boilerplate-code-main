@@ -1,8 +1,3 @@
-/**
- * Tasks / Follow-ups page — premium upgrade
- * Grouped timeline view (Overdue → Due Today → Upcoming → No date → Completed),
- * completion progress bar, priority accent bars, and full CRUD.
- */
 import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
