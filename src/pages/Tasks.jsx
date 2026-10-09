@@ -68,14 +68,12 @@ const STATUS_TABS = [
   { value: "Completed",   label: "Completed" },
 ];
 
-// ─── Helper: is a task overdue (has past dueDate, not completed)? ─────────────
 function isOverdue(task) {
   if (!task.dueDate || task.status === "Completed") return false;
   const d = new Date(task.dueDate);
   return isPast(d) && !isToday(d);
 }
 
-// ─── Helper: assign a task to a group key ────────────────────────────────────
 function groupKey(task) {
   if (task.status === "Completed") return "completed";
   if (!task.dueDate) return "nodate";
@@ -85,7 +83,6 @@ function groupKey(task) {
   return "upcoming";
 }
 
-// ─── Add / Edit dialog (declared at module level — no component-in-component) ─
 function TaskFormDialog({ open, onClose, task, leads, onSaved }) {
   const isEdit = Boolean(task);
 
