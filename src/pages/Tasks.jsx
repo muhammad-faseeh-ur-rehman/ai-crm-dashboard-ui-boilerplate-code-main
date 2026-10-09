@@ -367,7 +367,6 @@ export default function Tasks() {
     leadsApi.list().then((res) => setLeads(res.leads)).catch(() => {});
   }, []);
 
-  // ── KPI counts ───────────────────────────────────────────────────────────
   const stats = useMemo(() => {
     if (!tasks) return { total: 0, pending: 0, overdue: 0, completed: 0 };
     return {
@@ -378,30 +377,25 @@ export default function Tasks() {
     };
   }, [tasks]);
 
-  // ── Tab-filtered list ─────────────────────────────────────────────────────
   const filtered = useMemo(() => {
     if (!tasks) return [];
     if (tab === "all") return tasks;
     return tasks.filter((t) => t.status === tab);
   }, [tasks, tab]);
 
-  // ── Group the filtered tasks into timeline buckets ────────────────────────
   const groupedSections = useMemo(() => {
-    // Build a map: groupKey → [tasks]
     const map = {};
     GROUPS.forEach((g) => (map[g.key] = []));
     filtered.forEach((t) => {
       const key = groupKey(t);
       map[key].push(t);
     });
-    // Return only non-empty groups in display order
     return GROUPS.filter((g) => map[g.key].length > 0).map((g) => ({
       ...g,
       tasks: map[g.key],
     }));
   }, [filtered]);
 
-  // ── Actions ───────────────────────────────────────────────────────────────
   const openNew = () => {
     setEditing(null);
     setFormOpen(true);
@@ -412,7 +406,6 @@ export default function Tasks() {
     setFormOpen(true);
   };
 
-  /** Toggle task: Completed ↔ Pending (In Progress tasks also toggle to Completed). */
   const handleToggle = async (task) => {
     const next = task.status === "Completed" ? "Pending" : "Completed";
     try {
@@ -437,17 +430,14 @@ export default function Tasks() {
     }
   };
 
-  // ─────────────────────────────────────────────────────────────────────────
   return (
     <div className="space-y-6">
-      {/* Page header */}
       <PageHeader title="Follow-ups" subtitle="Stay on top of every commitment.">
         <Button onClick={openNew}>
           <Plus className="h-4 w-4" /> Add task
         </Button>
       </PageHeader>
 
-      {/* KPI stat cards */}
       <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
         <StatCard label="Total tasks"  value={stats.total}     icon={CalendarCheck} />
         <StatCard label="Pending"      value={stats.pending}   icon={Circle} />
@@ -455,19 +445,15 @@ export default function Tasks() {
         <StatCard label="Completed"    value={stats.completed} icon={CheckCircle2} accent />
       </div>
 
-      {/* Completion progress bar */}
       {tasks !== null && (
         <ProgressCard completed={stats.completed} total={stats.total} />
       )}
 
-      {/* Status filter tabs + grouped task list */}
       <Card className="overflow-hidden">
-        {/* Tabs toolbar */}
         <div className="border-b border-line px-5 py-3">
           <Tabs value={tab} onChange={setTab} tabs={STATUS_TABS} />
         </div>
 
-        {/* Body */}
         {tasks === null ? (
           <div className="flex items-center justify-center py-16">
             <Spinner />
@@ -516,7 +502,6 @@ export default function Tasks() {
         )}
       </Card>
 
-      {/* Add / Edit dialog */}
       <TaskFormDialog
         open={formOpen}
         onClose={() => setFormOpen(false)}
@@ -525,7 +510,6 @@ export default function Tasks() {
         onSaved={load}
       />
 
-      {/* Delete confirmation */}
       <ConfirmDialog
         open={Boolean(toDelete)}
         onClose={() => setToDelete(null)}
