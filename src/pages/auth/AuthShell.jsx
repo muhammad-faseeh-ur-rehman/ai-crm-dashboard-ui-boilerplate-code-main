@@ -44,7 +44,6 @@ export function AuthShell({ children }) {
         </p>
       </div>
 
-      {/* Form panel */}
       <div className="flex w-full flex-col items-center justify-center px-6 py-12 lg:w-1/2">
         <div className="w-full max-w-sm animate-fade-up">{children}</div>
       </div>
