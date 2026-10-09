@@ -3,7 +3,6 @@ import { Sparkles, TrendingUp, Bot, ShieldCheck } from "lucide-react";
 export function AuthShell({ children }) {
   return (
     <div className="flex min-h-screen bg-canvas">
-      {/* Brand / marketing panel */}
       <div className="relative hidden w-1/2 flex-col justify-between overflow-hidden bg-brand-700 p-12 text-white lg:flex">
         <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-brand-500/40 blur-3xl" />
         <div className="absolute -bottom-32 -left-16 h-96 w-96 rounded-full bg-brand-600/50 blur-3xl" />
