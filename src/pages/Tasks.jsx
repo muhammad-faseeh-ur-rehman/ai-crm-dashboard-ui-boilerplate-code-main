@@ -93,7 +93,6 @@ function TaskFormDialog({ open, onClose, task, leads, onSaved }) {
     formState: { errors, isSubmitting },
   } = useForm();
 
-  // Reset form whenever the dialog opens or the target task changes.
   useEffect(() => {
     if (open) {
       reset(
@@ -146,7 +145,6 @@ function TaskFormDialog({ open, onClose, task, leads, onSaved }) {
       description={isEdit ? "Update the details below." : "Fill in the details to create a task."}
     >
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        {/* Title */}
         <Field label="Title" error={errors.title?.message}>
           <Input
             placeholder="e.g. Follow up with Acme Corp"
@@ -154,13 +152,12 @@ function TaskFormDialog({ open, onClose, task, leads, onSaved }) {
           />
         </Field>
 
-        {/* Description */}
         <Field label="Description">
           <Textarea rows={3} placeholder="Optional notes…" {...register("description")} />
         </Field>
 
-        {/* Due date + Priority */}
         <div className="grid grid-cols-2 gap-3">
+          
           <Field label="Due date">
             <Input type="date" {...register("dueDate")} />
           </Field>
