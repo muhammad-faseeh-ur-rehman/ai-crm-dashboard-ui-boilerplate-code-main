@@ -53,7 +53,6 @@ const PRIORITY_BAR = {
   Low: "bg-slate-300",
 };
 
-// ─── Group definitions (in display order) ────────────────────────────────────
 const GROUPS = [
   { key: "overdue",   label: "Overdue",      labelClass: "text-rose-700",   countClass: "bg-rose-50 text-rose-700" },
   { key: "today",     label: "Due today",    labelClass: "text-amber-700",  countClass: "bg-amber-50 text-amber-700" },
@@ -62,7 +61,6 @@ const GROUPS = [
   { key: "completed", label: "Completed",    labelClass: "text-brand-700",  countClass: "bg-brand-50 text-brand-700" },
 ];
 
-// ─── Tab definitions ──────────────────────────────────────────────────────────
 const STATUS_TABS = [
   { value: "all",         label: "All" },
   { value: "Pending",     label: "Pending" },
