@@ -1,6 +1,5 @@
 import { Sparkles, TrendingUp, Bot, ShieldCheck } from "lucide-react";
 
-/* Split-screen auth layout: marketing panel on the left, form on the right. */
 export function AuthShell({ children }) {
   return (
     <div className="flex min-h-screen bg-canvas">
