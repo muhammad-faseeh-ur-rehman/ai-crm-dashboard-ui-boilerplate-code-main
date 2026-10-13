@@ -731,7 +731,7 @@ function ContactDrawer({ open, contact, onClose, onEdit, onDelete }) {
         </p>
         <div className="flex gap-3 pt-2 border-t border-line">
           <Button variant="outline" className="flex-1" onClick={onEdit}>
-            <Pencil className="h-4 w-4" /> Edit
+            <Pencil className="h-4 w-4" /> edit
           </Button>
           <Button variant="danger" size="sm" onClick={onDelete}>
             <Trash2 className="h-4 w-4" />
