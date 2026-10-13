@@ -3,11 +3,6 @@ import { Sparkles, TrendingUp, Lightbulb, RefreshCw } from "lucide-react";
 import { Card, Button, Spinner } from "../ui";
 import { aiApi } from "../../lib/services";
 import { toast } from "sonner";
-
-/**
- * AI Sales Insights panel — calls Gemini to analyse the current pipeline and
- * surface a health score, observations and recommendations.
- */
 export function AiInsightsCard() {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
