@@ -3,11 +3,6 @@ import { Sparkles, Copy, Check, Wand2 } from "lucide-react";
 import { Dialog, Button, Field, Select, Textarea, Spinner } from "../ui";
 import { aiApi } from "../../lib/services";
 import { toast } from "sonner";
-
-/**
- * AI email generator dialog. Given a lead, asks Gemini to draft a subject +
- * body for a chosen purpose & tone. The draft is editable before copying.
- */
 export function AiEmailDialog({ open, onClose, lead }) {
   const [purpose, setPurpose] = useState("Follow-up");
   const [tone, setTone] = useState("Friendly & professional");
