@@ -1,11 +1,6 @@
 import { ArrowUpRight, ArrowDownRight } from "lucide-react";
 import { Card } from "../ui";
 import { cn } from "../../lib/utils";
-
-/**
- * KPI stat card with icon, value and optional trend chip — mirrors the
- * "Weekly Revenue +12.8%" card style in the reference UI.
- */
 export function StatCard({ label, value, icon: Icon, trend, accent = false }) {
   const positive = trend == null || trend >= 0;
   return (
