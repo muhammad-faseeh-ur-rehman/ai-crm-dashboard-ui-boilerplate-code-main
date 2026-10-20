@@ -29,12 +29,10 @@ export default function Login() {
       setSubmitting(false);
     }
   };
-
   const useDemo = () => {
     setValue("email", "alex@timetoprogram.com");
     setValue("password", "Test@1234");
   };
-
   return (
     <AuthShell>
       <h1 className="text-2xl font-bold text-ink">Welcome back</h1>
