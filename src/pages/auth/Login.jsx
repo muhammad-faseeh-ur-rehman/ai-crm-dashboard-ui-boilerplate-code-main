@@ -11,14 +11,12 @@ export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const [submitting, setSubmitting] = useState(false);
-
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
   } = useForm({ defaultValues: { email: "", password: "" } });
-
   const onSubmit = async (data) => {
     setSubmitting(true);
     try {
