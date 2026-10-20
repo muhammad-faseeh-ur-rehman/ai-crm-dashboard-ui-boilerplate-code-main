@@ -1,5 +1,4 @@
 import { Sparkles, TrendingUp, Bot, ShieldCheck } from "lucide-react";
-
 export function AuthShell({ children }) {
   return (
     <div className="flex min-h-screen bg-canvas">
