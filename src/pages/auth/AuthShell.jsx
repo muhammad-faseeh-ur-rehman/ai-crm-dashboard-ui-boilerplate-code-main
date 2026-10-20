@@ -34,12 +34,10 @@ export function AuthShell({ children }) {
             ))}
           </div>
         </div>
-
         <p className="relative text-xs text-white/50">
           © {new Date().getFullYear()} Time To Program. All rights reserved.
         </p>
       </div>
-
       <div className="flex w-full flex-col items-center justify-center px-6 py-12 lg:w-1/2">
         <div className="w-full max-w-sm animate-fade-up">{children}</div>
       </div>
