@@ -6,7 +6,6 @@ import { Mail, Lock } from "lucide-react";
 import { AuthShell } from "./AuthShell";
 import { Button, Field, Input } from "../../components/ui";
 import { useAuth } from "../../context/AuthContext";
-
 export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
